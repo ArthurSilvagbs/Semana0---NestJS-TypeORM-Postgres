@@ -21,7 +21,7 @@ export class UsersService {
     return users;
   }
 
-  async findUserById(id: string): Promise<Users> {
+  async findUserById(id: string): Promise<UserDomain> {
     const userFound = await this.usersRepository.findOneBy({ id });
 
     if (userFound === null) {
@@ -32,6 +32,11 @@ export class UsersService {
   }
 
   async createUser(user: UserDomain): Promise<UserDomain> {
+    const createdUser = await this.usersRepository.save(user);
+    return createdUser;
+  }
+
+  async updateUser(user: UserDomain): Promise<UserDomain> {
     const createdUser = await this.usersRepository.save(user);
     return createdUser;
   }
