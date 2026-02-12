@@ -21,8 +21,22 @@ export class UsersService {
     return users;
   }
 
+  async findUserById(id: string): Promise<Users> {
+    const userFound = await this.usersRepository.findOneBy({ id });
+
+    if (userFound === null) {
+      throw new HttpException('User not found!', HttpStatus.NOT_FOUND);
+    }
+
+    return userFound;
+  }
+
   async createUser(user: UserDomain): Promise<UserDomain> {
     const createdUser = await this.usersRepository.save(user);
     return createdUser;
+  }
+
+  async deleteUserById(id: string): Promise<void> {
+    await this.usersRepository.delete(id);
   }
 }

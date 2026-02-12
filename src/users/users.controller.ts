@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
 import { UsersService } from './users.service';
 import * as express from 'express';
 import { UserDomain } from './user.domain';
@@ -16,5 +16,11 @@ export class UsersController {
   async createUser(@Res() response: express.Response, @Body() user: UserDomain) {
     const userCreated = await this.usersService.createUser(user);
     return response.status(201).json(userCreated);
+  }
+
+  @Delete()
+  deleteUser(@Res() response: express.Response, @Param() id: string) {
+    this.usersService.deleteUserById(id);
+    return response.status(204);
   }
 }
