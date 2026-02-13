@@ -74,6 +74,9 @@ export class UserController {
   @ApiOkResponse({
     description: 'The user updated successfully.',
   })
+  @ApiNotFoundResponse({
+    description: 'User not found.',
+  })
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     const user = await this.userService.update(id, updateUserDto);
