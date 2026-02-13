@@ -1,0 +1,26 @@
+###Lista de profiles
+GET http://localhost:3000/profiles
+
+###Get profile
+GET http://localhost:3000/profiles/1
+
+###Criar profile
+POST http://localhost:3000/profiles
+Content-Type: application/json
+
+{
+  "userId": "9570676f-7d58-4234-94e7-1ca4db8171d0",
+  "nickname": "Teste3",
+  "birthday": "2000-01-01"
+}  
+
+###Atualizar profile
+PATCH http://localhost:3000/profiles/1
+Content-Type: application/json
+
+{
+  "nickname": ""
+}
+
+###Deletar profile
+DELETE http://localhost:3000/profiles/1

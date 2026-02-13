@@ -2,7 +2,7 @@
 GET http://localhost:3000/users
 
 ###Get user
-GET http://localhost:3000/users/9af02ad0-052b-4fa7-b9d8-0fd36deea3e2
+GET http://localhost:3000/users/9570676f-7d58-4234-94e7-1ca4db8171d0
 
 ###Criar user
 POST http://localhost:3000/users
@@ -10,7 +10,7 @@ Content-Type: application/json
 
 {
   "name": "Teste",
-  "email": "teste90@example.com",
+  "email": "teste3@example.com",
   "password": "123456"
 }  
 

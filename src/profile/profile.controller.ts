@@ -1,9 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  NotFoundException,
+  HttpCode,
+} from '@nestjs/common';
 import { ProfileService } from './profile.service';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 
-@Controller('profile')
+@Controller('profiles')
 export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 
@@ -18,17 +28,28 @@ export class ProfileController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.profileService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const profile = await this.profileService.findOne(id);
+    if (!profile) {
+      throw new NotFoundException();
+    }
+    return profile;
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProfileDto: UpdateProfileDto) {
-    return this.profileService.update(+id, updateProfileDto);
+  // eslint-disable-next-line prettier/prettier
+  async update(@Param('id') id: string, @Body() updateProfileDto: UpdateProfileDto,) {
+    const profile = await this.profileService.update(id, updateProfileDto);
+    if (!profile) {
+      throw new NotFoundException();
+    }
+    return profile;
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.profileService.remove(+id);
+  @HttpCode(204)
+  async remove(@Param('id') id: string) {
+    const profile = await this.profileService.remove(id);
+    if (!profile) throw new NotFoundException();
   }
 }
