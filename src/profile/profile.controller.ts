@@ -74,8 +74,10 @@ export class ProfileController {
     description: 'Profile not found.',
   })
   @Patch(':id')
-  // eslint-disable-next-line prettier/prettier
-  async update(@Param('id') id: string, @Body() updateProfileDto: UpdateProfileDto,) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateProfileDto: UpdateProfileDto,
+  ) {
     const profile = await this.profileService.update(id, updateProfileDto);
     if (!profile) {
       throw new NotFoundException();
