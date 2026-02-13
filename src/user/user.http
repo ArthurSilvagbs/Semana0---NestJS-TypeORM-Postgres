@@ -10,17 +10,17 @@ Content-Type: application/json
 
 {
   "name": "Teste",
-  "email": "teste3@example.com",
+  "email": "teste10@example.com",
   "password": "123456"
 }  
 
 ###Atualizar user
-PATCH http://localhost:3000/users/0ba019f2-6f87-4c04-b116-6374b67353ba
+PATCH http://localhost:3000/users/9570676f-7d58-4234-94e7-1ca4db8171d0
 Content-Type: application/json
 
 {
-  "email": "teste10@hotmail.com"
+  "email": "teste1@example.com"
 }
 
 ###Deletar user
-DELETE http://localhost:3000/users/9af02ad0-052b-4fa7-b9d8-0fd36deea3e2
+DELETE http://localhost:3000/users/5633a1ba-e18d-4f09-a413-6e9428123fec

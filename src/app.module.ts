@@ -3,6 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { ProfileModule } from './profile/profile.module';
+import { Profile } from './profile/entities/profile.entity';
+import { User } from './user/entities/user.entity';
 
 @Module({
   imports: [
@@ -19,7 +21,7 @@ import { ProfileModule } from './profile/profile.module';
       synchronize: true,
       logging: false,
       migrations: [__dirname + '/database/migrations/*{.js,.ts}'],
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entities: [User, Profile],
     }),
     UserModule,
     ProfileModule,
