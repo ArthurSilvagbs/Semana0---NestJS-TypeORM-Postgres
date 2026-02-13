@@ -5,6 +5,7 @@ import { Profile } from './entities/profile.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/user/entities/user.entity';
+import { PaginationDto } from './dto/pagination.dto';
 
 @Injectable()
 export class ProfileService {
@@ -27,6 +28,18 @@ export class ProfileService {
 
   findAll() {
     return this.repository.find();
+  }
+
+  async getAllPaginated(paginationDto: PaginationDto) {
+    const { limit = 10, offset = 0 } = paginationDto;
+    const [profiles, total] = await this.repository.findAndCount({
+      skip: offset,
+      take: limit,
+    });
+    return {
+      data: profiles,
+      count: total,
+    };
   }
 
   async findOne(id: string) {
