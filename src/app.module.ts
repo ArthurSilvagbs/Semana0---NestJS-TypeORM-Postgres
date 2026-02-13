@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from './users/users.module';
-import { Users } from './users/user.entity';
+import { UserModule } from './user/user.module';
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
   imports: [
@@ -19,9 +19,10 @@ import { Users } from './users/user.entity';
       synchronize: true,
       logging: false,
       migrations: [__dirname + '/database/migrations/*{.js,.ts}'],
-      entities: [Users],
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
-    UsersModule,
+    UserModule,
+    ProfileModule,
   ],
   controllers: [],
   providers: [],
